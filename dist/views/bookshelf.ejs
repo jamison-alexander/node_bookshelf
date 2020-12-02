@@ -1,0 +1,80 @@
+<!DOCTYPE html>
+<html>
+<head>
+    <meta charset="utf-8" />
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <title>bookshelf Inventory</title>
+    <meta name="viewport" content="width=device-width, initial-scale=1">
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/materialize/1.0.0/css/materialize.min.css">
+    <link rel="stylesheet" href="https://fonts.googleapis.com/icon?family=Material+Icons">
+</head>
+<%- include('./partials/nav.ejs') %>
+<body>
+    <div class="container">
+        <div id="app">
+            <div class="row" id="bookshelfList">
+                <h3>bookshelf list</h3>
+                <table v-if="hazbookshelf">
+                    <thead>
+                        <tr>
+                            <th>title</th>
+                            <th>author</th>
+                            <th>Year</th>
+                            <th>genre</th>
+                            <th></th>
+                        </tr>
+                    </thead>
+                    <tbody>
+                        <tr v-for="book in bookshelf">
+                            <td>{{ booktitle }}</td>
+                            <td>{{ book.author }}</td>
+                            <td>{{ book.year }}</td>
+                            <td>{{ book.genre }}</td>
+                            <td>
+                                <button id="bookshelfDelete" @click="confirmDeletebookshelf(book.id)" class="btn-small"><i class="material-icons right">delete</i>Delete</button>
+                            </td>
+                        </tr>
+                    </tbody>
+                </table>
+                <p v-if="nobookshelf">No books yet!</p>
+            </div>
+            <div class="row" id="bookshelfEdit">
+                <h3>Add a book</h3>
+                <form class="col s12" @submit.prevent="addbook">
+                    <div class="row">
+                        <div class="input-field col s6">
+                            <input v-title="year" ref="year" placeholder="2005" id="year" type="text" class="validate">
+                            <label for="author">Year</label>
+                        </div>
+                        <div class="input-field col s6">
+                            <input v-title="author" ref="author" placeholder="Paul Reed Smith" id="author" type="text" class="validate">
+                            <label for="author">author</label>
+                        </div>
+                    </div>
+                    <div class="row">
+                        <div class="input-field col s6">
+                            <input v-title="title" ref="title" placeholder="Custom 24" id="title" type="text" class="validate">
+                            <label for="title">title</label>
+                        </div>
+                        <div class="input-field col s6">
+                            <input v-title="genre" ref="genre" placeholder="Whale Blue" id="genre" type="text" class="validate">
+                            <label for="title">genre</label>
+                        </div>
+                    </div>
+                    <button id="bookshelfEditSubmit" class="btn" type="submit"><i class="material-icons right">send</i>Submit</button>
+                </form>
+            </div>
+            <div id="deleteConfirm" ref="deleteConfirm" class="modal">
+                <div class="modal-content">
+                    <h4>Confirm delete</h4>
+                    <p>Delete {{ selectedbook }}?</p>
+                </div>
+                <div class="modal-footer">
+                    <button @click="deletebookshelf(selectedbookshelfId)" class="modal-close btn-flat">Ok</button>
+                    <button class="modal-close btn-flat">Cancel</button>
+                </div>
+            </div>
+        </div>
+    </div>
+    <script src="js/main.js"></script></body>
+</html>
