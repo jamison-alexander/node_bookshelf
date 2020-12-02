@@ -26,7 +26,7 @@ new Vue( {
     },
     el: "#app",
     methods: {
-        addbookshelf() {
+        addbook() {
             const bookshelf = {
                 title: this.title,
                 genre: this.genre,
@@ -34,7 +34,7 @@ new Vue( {
                 year: this.year
             };
             axios
-                .post( "/api/bookshelf/add", bookshelf )
+                .post( "/api/book/add", bookshelf )
                 .then( () => {
                     this.$refs.year.focus();
                     this.title = "";
@@ -58,7 +58,7 @@ new Vue( {
         },
         deletebookshelf( id: string ) {
             axios
-                .delete( `/api/bookshelf/remove/${ id }` )
+                .delete( `/api/book/remove/${ id }` )
                 .then( this.loadbookshelf )
                 .catch( ( err: any ) => {
                     // tslint:disable-next-line:no-console
@@ -67,7 +67,7 @@ new Vue( {
         },
         loadbookshelf() {
             axios
-                .get( "/api/bookshelf/all" )
+                .get( "/api/book/all" )
                 .then( ( res: any ) => {
                     this.isLoading = false;
                     this.bookshelf = res.data;

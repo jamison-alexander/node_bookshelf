@@ -14,7 +14,7 @@ export const register = ( app: express.Application ) => {
     const pgp = pgPromise();
     const db = pgp( config );
 
-    app.get( `/api/bookshelf/all`, oidc.ensureAuthenticated(), async ( req: any, res ) => {
+    app.get( `/api/book/all`, oidc.ensureAuthenticated(), async ( req: any, res ) => {
         try {
             const userId = req.userContext.userinfo.sub;
             const bookshelfs = await db.any( `
@@ -35,7 +35,7 @@ export const register = ( app: express.Application ) => {
         }
     } );
 
-    app.get( `/api/bookshelf/total`, oidc.ensureAuthenticated(), async ( req: any, res ) => {
+    app.get( `/api/book/total`, oidc.ensureAuthenticated(), async ( req: any, res ) => {
         try {
             const userId = req.userContext.userinfo.sub;
             const total = await db.one( `
@@ -54,7 +54,7 @@ export const register = ( app: express.Application ) => {
         }
     } );
 
-    app.get( `/api/bookshelf/find/:search`, oidc.ensureAuthenticated(), async ( req: any, res ) => {
+    app.get( `/api/book/find/:search`, oidc.ensureAuthenticated(), async ( req: any, res ) => {
         try {
             const userId = req.userContext.userinfo.sub;
             const bookshelf = await db.any( `
@@ -76,7 +76,7 @@ export const register = ( app: express.Application ) => {
         }
     } );
 
-    app.post( `/api/bookshelf/add`, oidc.ensureAuthenticated(), async ( req: any, res ) => {
+    app.post( `/api/book/add`, oidc.ensureAuthenticated(), async ( req: any, res ) => {
         try {
             const userId = req.userContext.userinfo.sub;
             const id = await db.one( `
@@ -92,7 +92,7 @@ export const register = ( app: express.Application ) => {
         }
     } );
 
-    app.post( `/api/bookshelf/update`, oidc.ensureAuthenticated(), async ( req: any, res ) => {
+    app.post( `/api/book/update`, oidc.ensureAuthenticated(), async ( req: any, res ) => {
         try {
             const userId = req.userContext.userinfo.sub;
             const id = await db.one( `
@@ -115,7 +115,7 @@ export const register = ( app: express.Application ) => {
         }
     } );
 
-    app.delete( `/api/bookshelf/remove/:id`, oidc.ensureAuthenticated(), async ( req: any, res ) => {
+    app.delete( `/api/book/remove/:id`, oidc.ensureAuthenticated(), async ( req: any, res ) => {
         try {
             const userId = req.userContext.userinfo.sub;
             const id = await db.result( `
