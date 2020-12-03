@@ -1,11 +1,12 @@
 import express from "express";
 import path from "path";
-import dotenv from "dotenv";
 import * as sessionAuth from "./middleware/sessionAuth";
 import * as routes from "./routes";
 
 // initialize configuration
-dotenv.config();
+if (process.env.NODE_ENV !== 'production') {
+    require("dotenv").dotenv.config();
+}
 
 const port = process.env.SERVER_PORT;
 
