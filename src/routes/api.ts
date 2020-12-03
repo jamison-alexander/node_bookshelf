@@ -3,16 +3,16 @@ import pgPromise from "pg-promise";
 
 export const register = ( app: express.Application ) => {
     const oidc = app.locals.oidc;
-    const port = parseInt( process.env.PGPORT || "5432", 10 );
+    const port = parseInt( process.env.PGPORT, 10 );
     const config = {
-        database: process.env.PGDATABASE || "postgres",
-        host: process.env.PGHOST || "localhost",
+        database: process.env.PGDATABASE,
+        host: process.env.PGHOST,
         port,
-        user: process.env.PGUSER || "postgres"
+        user: process.env.PGUSER
     };
 
     const pgp = pgPromise();
-    const db = pgp( config );
+    const db = process.env.NODE_ENV === 'production' ? pgp(process.env.DATABASE_URL) : pgp( config );
 
     app.get( `/api/book/all`, oidc.ensureAuthenticated(), async ( req: any, res ) => {
         try {
