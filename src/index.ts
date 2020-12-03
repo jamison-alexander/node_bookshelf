@@ -8,7 +8,7 @@ import * as routes from "./routes";
 if (process.env.NODE_ENV !== 'production') require("dotenv").config();
 
 
-const port = process.env.SERVER_PORT;
+const port = process.env.PORT;
 
 const app = express();
 app.use( express.json() );
