@@ -25,7 +25,7 @@
   "dependencies": {
     "@okta/oidc-middleware": "^5.0.0",
     "axios": "^0.28.0",
-    "ejs": "^3.1.5",
+    "ejs": "^3.1.10",
     "express": "^4.19.2",
     "express-session": "^1.17.1",
     "materialize-css": "^1.0.0",
